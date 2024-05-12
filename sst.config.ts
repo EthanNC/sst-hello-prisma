@@ -101,7 +101,7 @@ export default $config({
               external: ["@prisma/client"],
             },
           },
-      // live: false,
+
       architecture: "arm64",
       runtime: "nodejs20.x",
     } as sst.aws.FunctionArgs;
@@ -111,23 +111,8 @@ export default $config({
       handler: "src/api.handler",
       link: [cluster, user],
       ...lambdaPrismaConfig,
-      // nodejs: {
-      //   esbuild: {
-      //     external: ["@prisma/client", ".prisma"],
-      //   },
-      //   loader: {
-      //     ".prisma": "file",
-      //     ".so.node": "file",
-      //   },
-      // },
     });
 
-    // const host = cluster.connectionStrings[0].standardSrv.apply(
-    //   (s) => s.split(".")[1]
-    // );
-    // return {
-    //   connectionString: `mongodb+srv://${user.username}:${user.password}@${cluster.name}.${host}.mongodb.net/payload-dev?retryWrites=true`,
-    // };
     return {
       url: api.url,
     };
